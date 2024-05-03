@@ -1,5 +1,3 @@
-import Products from "../components/Products";
-
 const getData = async () => {
   const res = await fetch("https://jsonserver.reactbd.com/phone");
 
@@ -10,12 +8,10 @@ const getData = async () => {
   return res.json();
 };
 
-export default async function Home() {
+export const getSingleProduct = async (_id: number) => {
   const products = await getData();
-
-  return (
-    <div>
-      <Products products={products} />
-    </div>
+  const singleProduct = await products.find(
+    (product: any) => product._id === _id
   );
-}
+  return singleProduct;
+};
